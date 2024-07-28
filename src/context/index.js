@@ -36,8 +36,25 @@ class MyProvider extends Component{
         }else{
             this.setState({
                 stage : 2
+            },()=>{
+                this.generateLooser()
             })
         }
+    }
+    generateLooser = ()=>{
+        const {players} = this.state;
+        this.setState({
+            result : players[Math.floor(Math.random() * players.length)]
+        })
+
+    }
+    resetGame=()=>{
+        this.setState({
+        stage : 1 ,
+        players : [],
+        result : ''
+
+        })
     }
 
 
@@ -48,7 +65,9 @@ class MyProvider extends Component{
                 state : this.state , 
                 addPlayer : this.addPlayerHandler ,
                 removePlayer : this.removePlayerHandler ,
-                next : this.nextHandler
+                next : this.nextHandler,
+                getNewLooser : this.generateLooser,
+                resetGame : this.resetGame
             }}>
                 {this.props.children}
 

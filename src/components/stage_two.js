@@ -1,15 +1,36 @@
-import React , {Component} from "react";
+import React , {Component, useContext} from "react";
 import { StyleSheet , Text , View } from "react-native";
+import { MyContext } from "../context";
+import { Button } from "react-native-elements";
 
 const StageTwo = () =>{
+    const context = useContext(MyContext);
     return(
-        <View>
+        <>
             <Text>
-                Stage Two
+                The looser is
             </Text>
-        </View>
+            <Text style ={{marginTop : 30 , fontSize : 30}}>{context.state.result}</Text>
+            <Button
+            buttonStyle={styles.button}
+            title="Try Again"
+            onPress={()=> context.getNewLooser()}
+            />
+            <Button
+            buttonStyle={styles.button}
+            title="Start Over"
+            onPress={()=> context.resetGame()}
+            />
+        </>
 
     )
 }
+
+const styles = StyleSheet.create({
+    button : {
+        backgroundColor : '#DB3EB1',
+        marginTop : 20
+    }
+})
 
 export default StageTwo;
